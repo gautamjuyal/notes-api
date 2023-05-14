@@ -16,7 +16,8 @@ notesRouter
 notesRouter
   .route("/:id")
   .get(notesController.getNote)
-  .patch(notesController.editNote);
+  .patch(notesController.editNote)
+  .delete(notesController.deleteNote);
 
 app.use("/api/v1/notes", notesRouter); //middleware used at end since notesrouter needs to be cofig before using it
 

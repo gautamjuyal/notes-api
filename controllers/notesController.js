@@ -51,6 +51,49 @@ exports.createNote = async (req, res) => {
   }
 };
 
-exports.getNote = (req, res) => {};
+exports.getNote = async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+    res.status(200).json({
+      status: "success",
+      data: note,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "failure",
+      message: err,
+    });
+  }
+};
 
-exports.editNote = (req, res) => {};
+exports.editNote = async (req, res) => {
+  try {
+    const updatedNote = await Note.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.status(200).json({
+      status: "success",
+      data: updatedNote,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "failure",
+      message: err,
+    });
+  }
+};
+
+exports.deleteNote = async (req, res) => {
+  try {
+    await Note.findByIdAndDelete(req.params.id); //in rest arch, no data is send when deletion
+    res.status(200).json({
+      status: "success",
+      data: null,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "failure",
+      message: err,
+    });
+  }
+};
