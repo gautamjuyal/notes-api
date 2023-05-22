@@ -23,25 +23,17 @@ const Note = mongoose.model("Note", notesSchema);
 
 exports.getAllNotes = async (req, res) => {
   try {
-    if (Object.keys(req.body).length) {
-      console.log(req.body.text);
-      const notes = await Note.find({
-        $or: [
-          { title: { $regex: req.body.text, $options: "i" } },
-          { subText: { $regex: req.body.text, $options: "i" } },
-        ],
-      });
-      res.status(200).json({
-        status: "success",
-        data: notes,
-      });
-    } else {
-      const notes = await Note.find();
-      res.status(200).json({
-        status: "success",
-        data: notes,
-      });
-    }
+    const search = req.query.search ? req.query.search : "";
+    const notes = await Note.find({
+      $or: [
+        { title: { $regex: search, $options: "i" } },
+        { subText: { $regex: search, $options: "i" } },
+      ],
+    });
+    res.status(200).json({
+      status: "success",
+      data: notes,
+    });
   } catch (err) {
     res.status(400).json({
       status: "failure",
