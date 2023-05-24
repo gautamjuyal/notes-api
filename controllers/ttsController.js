@@ -7,6 +7,7 @@ exports.postTtsText = async (req, res) => {
   encodedParams.set("r", "0");
   encodedParams.set("c", "mp3");
   encodedParams.set("f", "8khz_8bit_mono");
+  encodedParams.set("b64", "true");
 
   const options = {
     method: "POST",
