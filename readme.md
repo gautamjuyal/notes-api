@@ -1,6 +1,6 @@
-# Notes api for todo/notes app.
+# Notes API
 
-Backend for notes app.
+Backend for notes app. Tech Stack : ExpressJS, NodeJS, MongoDB Atlas, Mongoose
 
 ## Notes
 
